@@ -14,11 +14,11 @@ eksctl create cluster --name kstadium --region ap-northeast-2 \
 
 </br>
 
-### fagate profile 생성
-
+## config 정보 업데이트
 ```bash
 aws eks update-kubeconfig --region ap-northeast-2 --name kstadium
 ```
+
 확인
 ```bash
 ❯ kubectl get svc
@@ -34,6 +34,10 @@ fargate-ip-10-10-24-108.ap-northeast-2.compute.internal   Ready    <none>   39m 
 fargate-ip-10-10-32-230.ap-northeast-2.compute.internal   Ready    <none>   39m   v1.24.9-eks-300e41d
 ```
 클러스터에 대한 네트워킹(Networking) 섹션의 AWS Management Console에서 해당 클러스터에 대한 보안 그룹을 확인할 수 있습니다. 또는 다음 AWS CLI 명령을 사용하여 확인할 수 있습니다. 이 명령을 사용하는 경우 my-cluster를 클러스터의 이름으로 바꿉니다.
+
 ```
-aws eks describe-cluster --name my-cluster --query cluster.resourcesVpcConfig.clusterSecurityGroupId
+export cluster=kstadium
+aws eks describe-cluster --name $cluster --query cluster.resourcesVpcConfig.clusterSecurityGroupId
 ```
+
+### fagate profile 생성
